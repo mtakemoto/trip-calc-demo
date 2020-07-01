@@ -13,12 +13,8 @@ class IndexPage extends React.Component {
       name: "",
       amt: "",
       people: {},
-      allTotal: 0
+      allTotal: 0,
     }
-  }
-
-  componentDidUpdate() {
-    //console.log(JSON.stringify(this.state));
   }
 
   handleNameChange = (e) => {
@@ -30,7 +26,7 @@ class IndexPage extends React.Component {
   }
 
   handleSubmit = (event) => {
-    const { name, amt, people, allTotal } = this.state;
+    const { name, amt, people, highest, allTotal } = this.state;
 
     if (!(name in people)) {
       let newPerson = { "name": name, "expenses": [amt], "total": amt };
@@ -56,7 +52,7 @@ class IndexPage extends React.Component {
           <Typography variant="h4">
             Add Expense
         </Typography>
-          <form onSubmit={this.handleSubmit}>
+          <form>
             <TextField id="name" value={this.state.name} onChange={this.handleNameChange} label="Name" type="text"/>
             <TextField id="amt" value={this.state.amt} onChange={this.handleAmtChange} label="Amount" type="number" />
             <Button onClick={this.handleSubmit}>Add</Button>

@@ -10,7 +10,7 @@ const personRender = (person, split) => {
                 Total: {person.total}
             </p>
             <p>
-                Owed: ${(person.total - split) < 0 ? -(person.total - split) : 0}
+                Owes: ${(person.total - split) < 0 ? -(person.total - split) : 0}
             </p>
         </li>
     );
@@ -22,7 +22,7 @@ const Ledger = (props) => {
     let split = peopleCount > 0
       ? allTotal / peopleCount
         : 0;
-    console.log(people)
+
     return (
         <>
             <Typography variant="h4">
