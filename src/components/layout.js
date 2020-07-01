@@ -5,14 +5,25 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-
-import Header from "./header"
 import "./layout.css"
 
+import { graphql, useStaticQuery } from "gatsby"
+
+import Header from "./header"
+import PropTypes from "prop-types"
+import React from "react"
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  footer: {
+    textAlign: 'center'
+  }
+});
+
 const Layout = ({ children }) => {
+  const classes = useStyles();
+
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -34,10 +45,12 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
+        <footer className={classes.footer}>
+          <Typography>
+            © {new Date().getFullYear()}, Built with
           {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+            <a href="https://www.gatsbyjs.org">Gatsby</a>
+          </Typography>
         </footer>
       </div>
     </>

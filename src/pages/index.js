@@ -26,7 +26,7 @@ class IndexPage extends React.Component {
   }
 
   handleSubmit = (event) => {
-    const { name, amt, people, highest, allTotal } = this.state;
+    const { name, amt, people, allTotal } = this.state;
 
     if (!(name in people)) {
       let newPerson = { "name": name, "expenses": [amt], "total": amt };
@@ -49,7 +49,7 @@ class IndexPage extends React.Component {
     return (
       <Layout>
         <Container>
-          <Typography variant="h4">
+          <Typography variant="h4" gutterBottom>
             Add Expense
         </Typography>
           <form>

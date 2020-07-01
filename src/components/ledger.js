@@ -1,26 +1,49 @@
+import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
-const personRender = (person, split) => {
+const useStyles = makeStyles({
+    grid: {
+        margin: "10px 0"
+    },
+    card: {
+        minWidth: 275,
+        margin: "5px",
+        padding: "5px 10px"
+    },
+    title: {
+        fontSize: 14,
+    },
+    pos: {
+        marginBottom: 12,
+    },
+});
+
+const personRender = (person, split, classes) => {
+
     return (
-        <li key={person.name}>
-            <h5>{person.name}</h5>
-            <p>Expenses: {person.expenses.join(", ")}</p>
-            <p>
+        <Card key={person.name} className={classes.card}>
+            <Typography gutterBottom variant="h5" component="h2">{person.name}</Typography>
+            <Typography variant="body1" color="textSecondary">
+                Expenses: {person.expenses.join(", ")}
+                <br />
                 Total: {person.total}
-            </p>
-            <p>
+                <br />
                 Owes: ${(person.total - split) < 0 ? -(person.total - split) : 0}
-            </p>
-        </li>
+            </Typography>
+        </Card>
     );
 }
 
 const Ledger = (props) => {
+    const classes = useStyles();
+
     let { people, allTotal } = props;
     let peopleCount = Object.keys(people).length;
     let split = peopleCount > 0
-      ? allTotal / peopleCount
+        ? allTotal / peopleCount
         : 0;
 
     return (
@@ -28,9 +51,9 @@ const Ledger = (props) => {
             <Typography variant="h4">
                 Ledger
             </Typography>
-            <ul>
-                {Object.values(people).map((person) => personRender(person, split))}
-            </ul>
+            <Grid container spacing={3} className={classes.grid}>
+                {Object.values(people).map((person) => personRender(person, split, classes))}
+            </Grid>
         </>
     )
 }
