@@ -9,11 +9,16 @@ import Typography from '@material-ui/core/Typography';
 class IndexPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { people: {}, allTotal: 0 }
+    this.state = {
+      name: "",
+      amt: "",
+      people: {},
+      allTotal: 0
+    }
   }
 
   componentDidUpdate() {
-    console.log(JSON.stringify(this.state));
+    //console.log(JSON.stringify(this.state));
   }
 
   handleNameChange = (e) => {
@@ -25,11 +30,10 @@ class IndexPage extends React.Component {
   }
 
   handleSubmit = (event) => {
-    const { name, amt } = this.state;
-    const people = this.state.people;
+    const { name, amt, people, allTotal } = this.state;
 
     if (!(name in people)) {
-      let newPerson = { expenses: [amt], total: amt };
+      let newPerson = { "name": name, "expenses": [amt], "total": amt };
       people[name] = newPerson;
     }
     else {
@@ -37,16 +41,11 @@ class IndexPage extends React.Component {
       people[name].total += amt;
     }
 
-    let newTotal = this.state.allTotal += amt;
-    let peopleCount = Object.keys(people).length;
-    let split = peopleCount > 0
-      ? newTotal / peopleCount
-      : 0;
+    let newTotal = allTotal + amt;
 
     this.setState(prevState => ({
       people: people,
       allTotal: newTotal,
-      split: split
     }));
   }
 
@@ -62,7 +61,7 @@ class IndexPage extends React.Component {
             <TextField id="amt" value={this.state.amt} onChange={this.handleAmtChange} label="Amount" type="number" />
             <Button onClick={this.handleSubmit}>Add</Button>
           </form>
-          <Ledger data={this.state.people} />
+          <Ledger people={this.state.people} allTotal={this.state.allTotal} />
         </Container>
       </Layout>
     );

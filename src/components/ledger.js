@@ -1,27 +1,35 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
-const personRender = (data, person) => {
+const personRender = (person, split) => {
     return (
-        <li key={person}>
-            <h5>{person}</h5>
-            <p>Expenses: {data[person].expenses.join(", ")}</p>
+        <li key={person.name}>
+            <h5>{person.name}</h5>
+            <p>Expenses: {person.expenses.join(", ")}</p>
             <p>
-                Total: {data[person].total}
+                Total: {person.total}
+            </p>
+            <p>
+                Owed: ${(person.total - split) < 0 ? -(person.total - split) : 0}
             </p>
         </li>
     );
 }
 
 const Ledger = (props) => {
-    let data = props.data;
+    let { people, allTotal } = props;
+    let peopleCount = Object.keys(people).length;
+    let split = peopleCount > 0
+      ? allTotal / peopleCount
+        : 0;
+    console.log(people)
     return (
         <>
             <Typography variant="h4">
                 Ledger
             </Typography>
             <ul>
-                {Object.keys(data).map((person) => personRender(data, person))}
+                {Object.values(people).map((person) => personRender(person, split))}
             </ul>
         </>
     )
