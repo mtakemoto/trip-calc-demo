@@ -46,12 +46,11 @@ const Ledger = (props) => {
     let split = peopleCount > 0
         ? allTotal / peopleCount
         : 0;
+    let titleText = peopleCount > 0 ? "Ledger" : "";
 
     return (
         <>
-            <Typography variant="h4">
-                Ledger
-            </Typography>
+            <Typography variant="h4">{titleText}</Typography>
             <Grid container spacing={3} className={classes.grid}>
                 {Object.values(people).map((person) => personRender(person, split, classes))}
             </Grid>

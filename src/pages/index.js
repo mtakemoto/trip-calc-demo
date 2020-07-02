@@ -1,10 +1,9 @@
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import ExpenseForm from '../components/expenseForm';
 import Layout from "../components/layout";
 import Ledger from '../components/ledger';
 import React from "react"
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -49,14 +48,13 @@ class IndexPage extends React.Component {
     return (
       <Layout>
         <Container>
-          <Typography variant="h4" gutterBottom>
-            Add Expense
-        </Typography>
-          <form>
-            <TextField id="name" value={this.state.name} onChange={this.handleNameChange} label="Name" type="text"/>
-            <TextField id="amt" value={this.state.amt} onChange={this.handleAmtChange} label="Amount" type="number" />
-            <Button onClick={this.handleSubmit}>Add</Button>
-          </form>
+          <ExpenseForm
+            name={this.state.name}
+            amt={this.state.amt}
+            handleNameChange={this.handleNameChange}
+            handleAmtChange={this.handleAmtChange}
+            handleSubmit={this.handleSubmit}
+          />
           <Ledger people={this.state.people} allTotal={this.state.allTotal} />
         </Container>
       </Layout>
