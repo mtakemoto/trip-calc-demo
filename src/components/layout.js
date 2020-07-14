@@ -47,7 +47,7 @@ const Layout = ({ children }) => {
         <main>{children}</main>
         <footer className={classes.footer}>
           <Typography>
-            Made with ☕ by <a href="https://github.com/mtakemoto/trip-calc-demo">@mtakemoto</a> for iTrellis
+            Made with ☕ by <a href="https://github.com/mtakemoto/trip-calc-demo">@mtakemoto</a>
           </Typography>
         </footer>
       </div>

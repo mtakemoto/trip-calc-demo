@@ -22,7 +22,8 @@ const useStyles = makeStyles({
 });
 
 const personRender = (person, split, classes) => {
-    let amtOwed = (person.total - split) < 0 ? -(person.total - split) : 0;
+    let amtOwed = (person.total - split).toFixed(2);
+    let resultText = amtOwed > 0 ? `Owed $${amtOwed}` : `Owes: -$${amtOwed*-1}`
 
     return (
         <Card key={person.name} className={classes.card}>
@@ -30,9 +31,9 @@ const personRender = (person, split, classes) => {
             <Typography variant="body1" color="textSecondary">
                 Expenses: {person.expenses.join(", ")}
                 <br />
-                Total: {person.total}
+                Total: ${person.total.toFixed(2)}
                 <br />
-                Owes: ${amtOwed.toFixed(2)}
+                {resultText}
             </Typography>
         </Card>
     );
