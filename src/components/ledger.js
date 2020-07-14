@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 
 const personRender = (person, split, classes) => {
     let amtOwed = (person.total - split).toFixed(2);
-    let resultText = amtOwed > 0 ? `Owed $${amtOwed}` : `Owes: -$${amtOwed*-1}`
+    let resultText = amtOwed >= 0 ? `Owed $${amtOwed}` : `Owes: -$${amtOwed*-1}`
 
     return (
         <Card key={person.name} className={classes.card}>
